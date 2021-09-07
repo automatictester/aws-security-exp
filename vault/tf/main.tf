@@ -96,7 +96,6 @@ EOF
 
 resource "aws_iam_role" "vault_assumed_role" {
   name = "VaultAssumedRole"
-
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
