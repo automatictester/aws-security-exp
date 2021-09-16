@@ -1,7 +1,7 @@
 Export GPG public key to get `aws_secret_access_key` (this assumes GPG key named `terraform` already exists):
 
 ```shell
-gpg --export -a "terraform" | sed "1,2d" | sed "$ d" | sed "$ d" > gpg/terraform.pub
+gpg --export -a "terraform" | sed "1,2d" | sed "$ d" | sed "$ d" > terraform.pub
 ```
 
 Get `aws_secret_access_key` after running `terraform apply`:

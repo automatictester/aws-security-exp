@@ -3,7 +3,7 @@
 terraform {
   backend "s3" {
     bucket = "automatictester-co-uk-aws-security-exp"
-    key = "vault.tfstate"
+    key = "vault-aws-auth.tfstate"
     region = "eu-central-1"
   }
   required_providers {
