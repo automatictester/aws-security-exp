@@ -124,8 +124,18 @@ resource "aws_iam_access_key" "vault_seal_key_user_access_key" {
   pgp_key = data.local_file.pgp_public_key.content
 }
 
+// outputs
+
 output "aws_access_key_id" {
   value = aws_iam_access_key.vault_seal_key_user_access_key.id
+}
+
+output "aws_kms_key_id" {
+  value = aws_kms_key.vault_seal_key.id
+}
+
+output "aws_kms_key_region" {
+  value = var.region
 }
 
 output "aws_secret_access_key" {
