@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-BUCKET_NAME=automatictester-co-uk-aws-security-exp
-REGION=eu-central-1
+set -ex
+
+BUCKET_NAME=automatictester-co-uk-aws-exp
+REGION=eu-west-1
 
 aws s3api create-bucket \
    --bucket ${BUCKET_NAME} \
