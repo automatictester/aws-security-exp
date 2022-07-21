@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "training_eks_cluster" {
-  name     = "training_eks_cluster"
+  name     = "training-eks-cluster"
   role_arn = aws_iam_role.eks_cluster_role.arn
   version  = var.k8s_version
 
@@ -19,16 +19,19 @@ resource "aws_eks_addon" "vpc_cni" {
   cluster_name  = aws_eks_cluster.training_eks_cluster.name
   addon_name    = "vpc-cni"
   addon_version = "v1.10.1-eksbuild.1"
+  depends_on    = [aws_eks_node_group.eks_node_group]
 }
 
 resource "aws_eks_addon" "coredns" {
   cluster_name  = aws_eks_cluster.training_eks_cluster.name
   addon_name    = "coredns"
   addon_version = "v1.8.7-eksbuild.1"
+  depends_on    = [aws_eks_node_group.eks_node_group]
 }
 
 resource "aws_eks_addon" "kube_proxy" {
   cluster_name  = aws_eks_cluster.training_eks_cluster.name
   addon_name    = "kube-proxy"
   addon_version = "v1.22.6-eksbuild.1"
+  depends_on    = [aws_eks_node_group.eks_node_group]
 }

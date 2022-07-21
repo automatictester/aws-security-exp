@@ -1,5 +1,5 @@
 resource "aws_launch_template" "eks_node_launch_template" {
-  name = "eks_node_launch_template"
+  name = "eks-node-launch-template"
 
   block_device_mappings {
     ebs {
@@ -13,8 +13,8 @@ resource "aws_launch_template" "eks_node_launch_template" {
 }
 
 resource "aws_eks_node_group" "eks_node_group" {
+  node_group_name = "eks-node-group"
   cluster_name    = aws_eks_cluster.training_eks_cluster.name
-  node_group_name = "eks_node_group"
   node_role_arn   = aws_iam_role.eks_node_role.arn
   subnet_ids      = [for k, v in var.subnets : aws_subnet.eks_vpc_subnet[k].id]
 

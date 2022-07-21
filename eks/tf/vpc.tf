@@ -4,7 +4,7 @@ resource "aws_vpc" "eks_vpc" {
   enable_dns_support   = true
 }
 
-resource "aws_internet_gateway" "eks_vpc_gw" {
+resource "aws_internet_gateway" "eks_vpc_igw" {
   vpc_id = aws_vpc.eks_vpc.id
 }
 
@@ -13,7 +13,7 @@ resource "aws_route_table" "eks_vpc_rt" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.eks_vpc_gw.id
+    gateway_id = aws_internet_gateway.eks_vpc_igw.id
   }
 }
 
@@ -38,10 +38,11 @@ resource "aws_route_table_association" "rt_association" {
 }
 
 resource "aws_security_group" "eks_node_sg" {
-  name        = "eks_node_sg"
-  description = "eks_node_sg"
+  name        = "eks-node-sg"
+  description = "eks-node-sg"
   vpc_id      = aws_vpc.eks_vpc.id
 }
+
 resource "aws_security_group_rule" "ingress_allow_all_from_my_public_ip" {
   security_group_id = aws_security_group.eks_node_sg.id
   type              = "ingress"
