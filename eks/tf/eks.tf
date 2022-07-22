@@ -6,7 +6,6 @@ resource "aws_eks_cluster" "training_eks_cluster" {
   vpc_config {
     subnet_ids              = [for s in aws_subnet.eks_vpc_subnet : s.id]
     public_access_cidrs     = ["${data.external.my_public_ip.result.ip}/32"]
-    security_group_ids      = [aws_security_group.eks_cluster_sg.id]
     endpoint_private_access = true
     endpoint_public_access  = true
   }

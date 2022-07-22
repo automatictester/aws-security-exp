@@ -32,6 +32,6 @@ resource "aws_launch_template" "eks_node_launch_template" {
   instance_type          = "t3.small"
   vpc_security_group_ids = [
     aws_security_group.eks_node_sg.id,
-    aws_security_group.eks_cluster_sg.id
+    aws_eks_cluster.training_eks_cluster.vpc_config[0].cluster_security_group_id
   ]
 }
