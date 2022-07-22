@@ -1,3 +1,3 @@
-output "eks_node_ip_address" {
-  value = data.aws_instance.eks_node.public_ip
+output "eks_nodes_ip_addresses" {
+  value = data.aws_instances.eks_nodes.public_ips
 }

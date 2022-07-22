@@ -43,7 +43,7 @@ resource "aws_security_group" "eks_node_sg" {
   vpc_id      = aws_vpc.eks_vpc.id
 }
 
-resource "aws_security_group_rule" "ingress_allow_all_from_my_public_ip" {
+resource "aws_security_group_rule" "eks_node_ingress_allow_all_from_my_public_ip" {
   security_group_id = aws_security_group.eks_node_sg.id
   type              = "ingress"
   from_port         = 0
@@ -54,8 +54,34 @@ resource "aws_security_group_rule" "ingress_allow_all_from_my_public_ip" {
   ]
 }
 
-resource "aws_security_group_rule" "egress_allow_all" {
+resource "aws_security_group_rule" "eks_node_egress_allow_all" {
   security_group_id = aws_security_group.eks_node_sg.id
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = [
+    "0.0.0.0/0"
+  ]
+}
+
+resource "aws_security_group" "eks_cluster_sg" {
+  name        = "eks-cluster-sg"
+  description = "eks-cluster-sg"
+  vpc_id      = aws_vpc.eks_vpc.id
+}
+
+resource "aws_security_group_rule" "eks_cluster_ingress_allow_sg" {
+  security_group_id = aws_security_group.eks_cluster_sg.id
+  type              = "ingress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  self              = true
+}
+
+resource "aws_security_group_rule" "eks_cluster_egress_allow_all" {
+  security_group_id = aws_security_group.eks_cluster_sg.id
   type              = "egress"
   from_port         = 0
   to_port           = 0
