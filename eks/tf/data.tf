@@ -2,7 +2,7 @@ data "external" "my_public_ip" {
   program = ["bash", "-c", "curl -s 'https://api.ipify.org?format=json'"]
 }
 
-data "aws_ami" "amazon_linux_2" {
+data "aws_ami" "amazon_linux_eks_node" {
   owners = ["amazon"]
 
   filter {
