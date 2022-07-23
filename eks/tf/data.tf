@@ -2,15 +2,6 @@ data "external" "my_public_ip" {
   program = ["bash", "-c", "curl -s 'https://api.ipify.org?format=json'"]
 }
 
-data "aws_ami" "amazon_linux_eks_node" {
-  owners = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amazon-eks-node-1.22-v20220629"]
-  }
-}
-
 data "aws_instances" "eks_nodes" {
   filter {
     name   = "tag:aws:eks:cluster-name"
