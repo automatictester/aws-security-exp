@@ -41,4 +41,5 @@ resource "aws_eks_addon" "aws_ebs_csi_driver" {
   addon_name               = "aws-ebs-csi-driver"
   addon_version            = "v1.8.0-eksbuild.0"
   service_account_role_arn = aws_iam_role.ebs_csi_driver_service_account_role.arn
+  depends_on               = [aws_eks_node_group.eks_node_group]
 }
