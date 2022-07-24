@@ -18,7 +18,12 @@ variable "subnets" {
   }
 }
 
+variable "cluster_name" {
+  type    = string
+  default = "training-eks-cluster"
+}
+
 variable "k8s_version" {
-  type = string
+  type    = string
   default = "1.22"
 }

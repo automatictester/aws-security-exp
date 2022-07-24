@@ -8,6 +8,12 @@ terraform {
     aws = {
       version = "4.22.0"
     }
+    external = {
+      version = "2.2.2"
+    }
+    tls = {
+      version = "3.4.0"
+    }
   }
 }
 
