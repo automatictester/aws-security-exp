@@ -21,7 +21,7 @@ provider "aws" {
   region = var.region
   default_tags {
     tags = {
-      Name = "eks-cluster"
+      Name = "training-eks-cluster"
     }
   }
 }
