@@ -1,6 +1,6 @@
 locals {
   account_id        = data.aws_caller_identity.current.account_id
-  oidc_provider_url = data.tls_certificate.oidc_provider_url.url
+  oidc_provider_url = data.tls_certificate.oidc_provider_tls_certificate.url
   oidc_provider     = trimprefix(local.oidc_provider_url, "https://")
 }
 
@@ -92,5 +92,5 @@ resource "aws_iam_role_policy_attachment" "eks_node_role_cni_policy_attachment" 
 resource "aws_iam_openid_connect_provider" "oidc_provider" {
   url             = local.oidc_provider_url
   client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = [data.tls_certificate.oidc_provider_url.certificates[0].sha1_fingerprint]
+  thumbprint_list = [data.tls_certificate.oidc_provider_tls_certificate.certificates[0].sha1_fingerprint]
 }

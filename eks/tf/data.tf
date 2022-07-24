@@ -12,6 +12,6 @@ data "aws_instances" "eks_nodes" {
   depends_on = [aws_eks_node_group.eks_node_group]
 }
 
-data "tls_certificate" "oidc_provider_url" {
+data "tls_certificate" "oidc_provider_tls_certificate" {
   url = aws_eks_cluster.training_eks_cluster.identity[0].oidc[0].issuer
 }
